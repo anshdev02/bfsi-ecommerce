@@ -13,6 +13,16 @@ A **production-grade full-stack BFSI (Banking, Financial Services & Insurance) a
 
 ---
 
+## Screenshots
+
+![Login](images/login.png)
+![Register](images/register.png)
+![Dashboard](images/dashboard.png)
+![Products](images/products.png)
+![Wallet](images/wallet.png)
+
+---
+
 ## Features
 
 - **JWT Authentication** — Stateless login with access + refresh tokens
