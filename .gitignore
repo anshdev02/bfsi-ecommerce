@@ -1,0 +1,31 @@
+# Dependencies
+target/
+node_modules/
+frontend/node_modules/
+frontend/build/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Env / secrets
+*.env
+app.env
+*.pem
+*.key
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+
+# Build artifacts
+*.jar
+!target/*.jar

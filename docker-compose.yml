@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  # ── MySQL Database ────────────────────────────────────────────────────────
+  mysql:
+    image: mysql:8.0
+    container_name: bfsi_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bfsi_db
+      MYSQL_USER: bfsi_user
+      MYSQL_PASSWORD: bfsi_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Spring Boot Application ───────────────────────────────────────────────
+  app:
+    build: .
+    container_name: bfsi_app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: bfsi_db
+      DB_USER: bfsi_user
+      DB_PASSWORD: bfsi_pass
+      JWT_SECRET: bfsi-local-dev-secret-key-256-bits-minimum-length-here
+      JWT_EXPIRATION: 86400000
+    ports:
+      - "8080:8080"
+    restart: on-failure
+
+volumes:
+  mysql_data:
